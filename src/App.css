@@ -12,6 +12,18 @@ body {
   background-attachment: fixed;
 }
 
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: #111;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(45deg, #667eea, #0ea5e9, #10b981);
+}
+
 .toggleBar {
   position: relative;
   height: 2.4px;
