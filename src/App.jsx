@@ -1,11 +1,17 @@
 import React from 'react';
+import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import './App.css';
+
+// pages
+import Home from './pages/Home';
 
 const App = () => {
   return (
-    <div className="bg-black">
-      <h1 className="text-[#fff]">Hello!</h1>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home/>}/>
+      </Routes>
+    </BrowserRouter>
   );
 }
 
