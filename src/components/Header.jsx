@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 
+// icons
 import { HiPlus } from "react-icons/hi";
 import { BiSearchAlt } from 'react-icons/bi';
 import { RiArrowDropRightLine } from 'react-icons/ri';
 import { RiArrowDropLeftLine } from 'react-icons/ri';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
     const [toggle, setToggle] = useState(false);
@@ -40,7 +42,7 @@ const Header = () => {
     return (
         <div className="flex flex-col xl:flex-row items-center justify-between w-full">
             {/* title */}
-            <h1 className="text-[#fff] text-[2.2rem] uppercase font-[700] bg-gradient-to-r from-indigo-400 via-sky-400 to-emerald-400 inline-block text-transparent bg-clip-text">Macros.</h1>
+            <Link to="/" className="text-[#fff] text-[2.2rem] uppercase font-[700] bg-gradient-to-r from-indigo-400 via-sky-400 to-emerald-400 inline-block text-transparent bg-clip-text">Macros.</Link>
 
             <div className="relative mt-[1rem] xl:mt-0 flex flex-wrap items-center justify-center xl:justify-end gap-[1rem] w-full">
                 {/* projects count */}
@@ -76,11 +78,15 @@ const Header = () => {
                     </select>
                 </div>
 
+                {/* toggle bar */}
                 <div onClick={handleNavToggle} className={`toggler ${toggle ? 'active' : null} h-[44px] w-[54px] grid place-items-center cursor-pointer bg-gradient-to-r from-indigo-500 via-sky-500 to-emerald-500 rounded-lg`}>
                     <span className="toggleBar"></span>
                 </div>
 
+                {/* navigation */}
                 <div onClick={(e) => e.stopPropagation()} className={`${toggle ? 'opacity-100 visible pointer-events-auto' : 'opacity-0 invisible pointer-events-none'} absolute top-[4rem] right-0 w-[260px] h-auto flex items-start justify-start rounded-lg overflow-hidden transition-all ease-in-out duration-300 z-[99999]`} style={toggle ? {transform: 'translateX(0)'} : {transform: 'translateX(2rem)'}}>
+                    
+                    {/* left nav */}
                     <ul className={`${activeRightNav ? 'pointer-events-none' : 'pointer-events-auto'} list-none h-auto max-h-[400px] min-w-[260px] overflow-y-auto bg-[#222] border-[1px] border-[#000] rounded-lg transition-all ease-in-out duration-300`} style={activeRightNav ? {transform: 'translateX(-100%)'} : {transform: 'translateX(0)'}}>
                         <li onClick={() => handleGoToRightNav('react')} className="ps-[0.8rem] h-[44px] flex items-center justify-between cursor-pointer hover:bg-[#333] transition-all ease-in-out duration-300">
                             <span className="text-[1.1rem] font-[500]">React Projects</span>
@@ -96,6 +102,7 @@ const Header = () => {
                         </li>
                     </ul>
 
+                    {/* right nav */}
                     <div className={`navRight ${activeRightNav ? 'activeRight pointer-events-auto' : 'pointer-events-none'} min-w-[260px] max-h-[400px] bg-[#222] border-[1px] border-[#000] rounded-lg overflow-y-auto transition-all ease-in-out duration-300`} style={activeRightNav ? {transform: 'translateX(-100%)'} : {transform: 'translateX(0)'}}>
 
                         {/* react projects */}
