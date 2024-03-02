@@ -1,9 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { HiPlus } from "react-icons/hi";
 import { BiSearchAlt } from 'react-icons/bi';
 
 const Header = () => {
+    const [toggle, setToggle] = useState(false);
+
+    const handleNavToggle = (e) => {
+        e.stopPropagation();
+        setToggle(!toggle);
+    }
+
     return (
         <div className="flex flex-col xl:flex-row items-center justify-between w-full">
             {/* title */}
@@ -41,6 +48,10 @@ const Header = () => {
                         <option value="bigger">Bigger</option>
                         <option value="smaller">Smaller</option>
                     </select>
+                </div>
+
+                <div onClick={handleNavToggle} className={`toggler ${toggle ? 'active' : null} h-[44px] w-[54px] grid place-items-center cursor-pointer bg-gradient-to-r from-indigo-500 via-sky-500 to-emerald-500 rounded-lg`}>
+                    <span className="toggleBar"></span>
                 </div>
             </div>
         </div>
