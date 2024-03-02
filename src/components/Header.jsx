@@ -7,7 +7,7 @@ import { RiArrowDropRightLine } from 'react-icons/ri';
 import { RiArrowDropLeftLine } from 'react-icons/ri';
 import { Link } from 'react-router-dom';
 
-const Header = () => {
+const Header = ({setShowForm}) => {
     const [toggle, setToggle] = useState(false);
     const [activeRightNav, setActiveRightNav] = useState(false);
     const [listCategory, setListCategory] = useState('react');
@@ -53,7 +53,7 @@ const Header = () => {
                 </div>
 
                 {/* add project */}
-                <div className="px-[0.8rem] py-[0.55rem] flex items-center gap-[0.3rem] bg-gradient-to-r from-indigo-500 via-sky-500 to-emerald-500 rounded-lg cursor-pointer">
+                <div onClick={() => setShowForm(true)} className="px-[0.8rem] py-[0.55rem] flex items-center gap-[0.3rem] bg-gradient-to-r from-indigo-500 via-sky-500 to-emerald-500 rounded-lg cursor-pointer">
                     <HiPlus className="text-[1.2rem]"/>
                     <span className="text-[1.1rem] font-[500]">Add Project</span>
                 </div>
