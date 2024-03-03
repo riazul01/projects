@@ -4,12 +4,16 @@ import ReactDOM from 'react-dom';
 // context
 import { ProjectUploadContext } from '../context/ProjectUploadContextProvider';
 
+// toastify
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 // icons
 import { MdUpload } from "react-icons/md";
 import { FaTimes } from "react-icons/fa";
 
 const AddProject = ({setShowForm}) => {
-    const {setProjectData} = useContext(ProjectUploadContext);
+    const {setProjectData, isUploaded, setIsUploaded} = useContext(ProjectUploadContext);
     const [project, setProject] = useState({title: '', fonts: '', icons: '', status: '', plugins: '', tags: '', type: '', site: '', code: ''});
     const [selectedImage, setSelectedImage] = useState(null);
     const [previewImage, setPreviewImage] = useState(null);
@@ -20,6 +24,15 @@ const AddProject = ({setShowForm}) => {
         reader.readAsDataURL(selectedImage);
         reader.onload = () => setPreviewImage(reader.result);
     }, [selectedImage]);
+
+    useEffect(() => {
+        if (isUploaded) {
+            setProject({title: '', fonts: '', icons: '', status: '', plugins: '', tags: '', type: '', site: '', code: ''});
+            setSelectedImage(null);
+            setPreviewImage(null);
+            setIsUploaded(false);
+        }
+    }, [isUploaded]);
 
     const handleInputChange = (e) => {
         if (e.target.type === 'text') {
@@ -49,6 +62,7 @@ const AddProject = ({setShowForm}) => {
     }
 
     return ReactDOM.createPortal(
+        <>
         <div className="py-[5rem] fixed top-0 left-0 h-screen w-full flex items-start justify-center bg-[#000] bg-opacity-70 overflow-auto z-50">
             
             {/* close form */}
@@ -88,7 +102,20 @@ const AddProject = ({setShowForm}) => {
                     <button type="submit" className="text-[1.1rem] font-[500] h-[44px] w-full rounded-lg bg-gradient-to-r from-indigo-600 via-sky-600 to-emerald-600">Submit</button>
                 </form>
             </div>
-        </div>,
+        </div>
+        <ToastContainer
+            position="bottom-left"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="dark"
+        />
+        </>,
         document.getElementById('form')
     );
 }
