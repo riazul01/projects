@@ -1,11 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import ReactDOM from 'react-dom';
+
+// context
+import { ProjectUploadContext } from '../context/ProjectUploadContextProvider';
 
 // icons
 import { MdUpload } from "react-icons/md";
 import { FaTimes } from "react-icons/fa";
 
 const AddProject = ({setShowForm}) => {
+    const {setProjectData} = useContext(ProjectUploadContext);
     const [project, setProject] = useState({title: '', fonts: '', icons: '', status: '', plugins: '', tags: '', type: '', site: '', code: ''});
     const [selectedImage, setSelectedImage] = useState(null);
     const [previewImage, setPreviewImage] = useState(null);
@@ -29,10 +33,19 @@ const AddProject = ({setShowForm}) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(project);
-        setProject({title: '', fonts: '', icons: '', status: '', plugins: '', tags: '', type: '', site: '', code: ''});
-        setPreviewImage(null);
-        setSelectedImage(null);
+        const projectData = {
+            title: project.title,
+            fonts: project.fonts.split(' '),
+            icons: project.icons.split(' '),
+            status: project.status,
+            plugins: project.plugins.split(' '),
+            tags: project.tags.split(' '),
+            type: project.type,
+            site: project.site,
+            code: project.code,
+            image: selectedImage
+        }
+        setProjectData(projectData);
     }
 
     return ReactDOM.createPortal(
