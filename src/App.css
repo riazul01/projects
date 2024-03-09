@@ -69,6 +69,12 @@ body {
   top: 0;
 }
 
+.project-title:hover ~ .icon-link {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
 .tags span.html {
   background: #de5e02;
 }
