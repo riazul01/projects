@@ -75,6 +75,11 @@ body {
   pointer-events: auto;
 }
 
+.tags span {
+  text-shadow: 0.1rem 0.1rem 0.2rem #111;
+  box-shadow: 0.1rem 0.1rem 0.2rem #222;
+}
+
 .tags span.html {
   background: #de5e02;
 }
