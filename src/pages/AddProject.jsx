@@ -51,7 +51,7 @@ const AddProject = ({setShowForm}) => {
             fonts: project.fonts.split(' '),
             icons: project.icons.split(' '),
             status: project.status,
-            plugins: project.plugins.split(' '),
+            plugins: project !== '' ? project.plugins.split(' ') : '',
             tags: project.tags.split(' '),
             type: project.type,
             site: project.site,
@@ -81,9 +81,9 @@ const AddProject = ({setShowForm}) => {
                     <input value={project.fonts} onChange={handleInputChange} type="text" name="fonts" className="mt-[1rem] ps-[0.8rem] text-[1.1rem] h-[44px] w-full bg-[#111] border-none outline-none rounded-lg" placeholder="Fonts" required/>
                     <input value={project.icons} onChange={handleInputChange} type="text" name="icons" className="mt-[1rem] ps-[0.8rem] text-[1.1rem] h-[44px] w-full bg-[#111] border-none outline-none rounded-lg" placeholder="Icons" required/>
                     <input value={project.status} onChange={handleInputChange} type="text" name="status" className="mt-[1rem] ps-[0.8rem] text-[1.1rem] h-[44px] w-full bg-[#111] border-none outline-none rounded-lg" placeholder="Status" required/>
-                    <input value={project.plugins} onChange={handleInputChange} type="text" name="plugins" className="mt-[1rem] ps-[0.8rem] text-[1.1rem] h-[44px] w-full bg-[#111] border-none outline-none rounded-lg" placeholder="Plugins" required/>
+                    <input value={project.plugins} onChange={handleInputChange} type="text" name="plugins" className="mt-[1rem] ps-[0.8rem] text-[1.1rem] h-[44px] w-full bg-[#111] border-none outline-none rounded-lg" placeholder="Plugins"/>
                     <input value={project.tags} onChange={handleInputChange} type="text" name="tags" className="mt-[1rem] ps-[0.8rem] text-[1.1rem] h-[44px] w-full bg-[#111] border-none outline-none rounded-lg" placeholder="Tags" required/>
-                    <input value={project.type} onChange={handleInputChange} type="text" name="type" className="mt-[1rem] ps-[0.8rem] text-[1.1rem] h-[44px] w-full bg-[#111] border-none outline-none rounded-lg" placeholder="Complexity" required/>
+                    <input value={project.type} onChange={handleInputChange} type="text" name="type" className="mt-[1rem] ps-[0.8rem] text-[1.1rem] h-[44px] w-full bg-[#111] border-none outline-none rounded-lg" placeholder="Type" required/>
                     <input value={project.site} onChange={handleInputChange} type="text" name="site" className="mt-[1rem] ps-[0.8rem] text-[1.1rem] h-[44px] w-full bg-[#111] border-none outline-none rounded-lg" placeholder="Preview Link" required/>
                     <input value={project.code} onChange={handleInputChange} type="text" name="code" className="mt-[1rem] ps-[0.8rem] text-[1.1rem] h-[44px] w-full bg-[#111] border-none outline-none rounded-lg" placeholder="GitHub Link" required/>
                     
