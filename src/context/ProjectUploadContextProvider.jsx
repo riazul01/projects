@@ -28,7 +28,7 @@ const ProjectUploadContextProvider = ({ children }) => {
             }
 
             const storageRef = ref(storage, `images/${projectData.image.name}`);
-            const uploadTask = uploadBytesResumable(storageRef, projectData.image.name);
+            const uploadTask = uploadBytesResumable(storageRef, projectData.image);
 
             // upload project image to storage
             uploadTask.on('state_changed', (snapshot) => {
