@@ -24,8 +24,8 @@ const Home = () => {
             {showForm && <AddProject setShowForm={setShowForm}/>}
 
             {!loading && <div className="py-[2rem] grid grid-cols-3">
-                {projects.map((project) => {
-                    return <ProjectCard data={project}/>
+                {projects.map((project, index) => {
+                    return <ProjectCard key={project.id} data={project} index={index}/>
                 })}
             </div>}
         </AppLayout>
