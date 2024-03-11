@@ -3,7 +3,7 @@ import React, { useState, useEffect, createContext } from 'react';
 import { fs } from '../firebase';
 import { collection, query, onSnapshot } from "firebase/firestore";
 
-const ProjectsContext = createContext();
+export const ProjectsContext = createContext();
 
 const ProjectsContextProvider = ({ children }) => {
     const [projects, setProjects] = useState([]);

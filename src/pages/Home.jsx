@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import AppLayout from '../layouts/AppLayout';
 import Header from '../components/Header';
 import AddProject from './AddProject';
 import ProjectCard from '../components/ProjectCard';
+import { ProjectsContext } from '../context/ProjectsContextProvider';
 
 const Home = () => {
+    const {projects, loading} = useContext(ProjectsContext);
     const [showForm, setShowForm] = useState(false);
 
     useEffect(() => {
@@ -21,17 +23,11 @@ const Home = () => {
             <Header setShowForm={setShowForm}/>
             {showForm && <AddProject setShowForm={setShowForm}/>}
 
-            <div className="py-[2rem] grid grid-cols-3">
-                <ProjectCard/>
-                <ProjectCard/>
-                <ProjectCard/>
-                <ProjectCard/>
-                <ProjectCard/>
-                <ProjectCard/>
-                <ProjectCard/>
-                <ProjectCard/>
-                <ProjectCard/>
-            </div>
+            {!loading && <div className="py-[2rem] grid grid-cols-3">
+                {projects.map((project) => {
+                    return <ProjectCard data={project}/>
+                })}
+            </div>}
         </AppLayout>
     );
 }
