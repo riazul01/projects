@@ -14,7 +14,7 @@ import { FaTimes } from "react-icons/fa";
 
 const AddProject = ({setShowForm}) => {
     const {setProjectData, isUploaded, setIsUploaded} = useContext(ProjectUploadContext);
-    const [project, setProject] = useState({title: '', fonts: '', icons: '', status: '', plugins: '', tags: '', type: '', site: '', code: ''});
+    const [project, setProject] = useState({title: '', fonts: '', icons: '', status: '', plugins: '', tags: '', type: '', size: '', categories: '', site: '', code: ''});
     const [selectedImage, setSelectedImage] = useState(null);
     const [previewImage, setPreviewImage] = useState(null);
 
@@ -27,7 +27,7 @@ const AddProject = ({setShowForm}) => {
 
     useEffect(() => {
         if (isUploaded) {
-            setProject({title: '', fonts: '', icons: '', status: '', plugins: '', tags: '', type: '', site: '', code: ''});
+            setProject({title: '', fonts: '', icons: '', status: '', plugins: '', tags: '', type: '', size: '', categories: '', site: '', code: ''});
             setSelectedImage(null);
             setPreviewImage(null);
             setIsUploaded(false);
@@ -49,11 +49,13 @@ const AddProject = ({setShowForm}) => {
         const projectData = {
             title: project.title,
             fonts: project.fonts.split(' '),
-            icons: project.icons.split(' '),
+            icons: project.icons !== '' ? project.icons.split(' ') : '',
             status: project.status,
-            plugins: project !== '' ? project.plugins.split(' ') : '',
+            plugins: project.plugins !== '' ? project.plugins.split(' ') : '',
             tags: project.tags.split(' '),
             type: project.type,
+            size: project.size,
+            categories: project.categories.split(' '),
             site: project.site,
             code: project.code,
             image: selectedImage
@@ -79,11 +81,13 @@ const AddProject = ({setShowForm}) => {
                 <form onSubmit={handleSubmit} className="mt-[1.4rem] w-full h-auto">
                     <input value={project.title} onChange={handleInputChange} type="text" name="title" className="mt-[0.4rem] ps-[0.8rem] text-[1.1rem] h-[44px] w-full bg-[#111] border-none outline-none rounded-lg" placeholder="Project title" required/>
                     <input value={project.fonts} onChange={handleInputChange} type="text" name="fonts" className="mt-[1rem] ps-[0.8rem] text-[1.1rem] h-[44px] w-full bg-[#111] border-none outline-none rounded-lg" placeholder="Fonts" required/>
-                    <input value={project.icons} onChange={handleInputChange} type="text" name="icons" className="mt-[1rem] ps-[0.8rem] text-[1.1rem] h-[44px] w-full bg-[#111] border-none outline-none rounded-lg" placeholder="Icons" required/>
+                    <input value={project.icons} onChange={handleInputChange} type="text" name="icons" className="mt-[1rem] ps-[0.8rem] text-[1.1rem] h-[44px] w-full bg-[#111] border-none outline-none rounded-lg" placeholder="Icons"/>
                     <input value={project.status} onChange={handleInputChange} type="text" name="status" className="mt-[1rem] ps-[0.8rem] text-[1.1rem] h-[44px] w-full bg-[#111] border-none outline-none rounded-lg" placeholder="Status" required/>
                     <input value={project.plugins} onChange={handleInputChange} type="text" name="plugins" className="mt-[1rem] ps-[0.8rem] text-[1.1rem] h-[44px] w-full bg-[#111] border-none outline-none rounded-lg" placeholder="Plugins"/>
                     <input value={project.tags} onChange={handleInputChange} type="text" name="tags" className="mt-[1rem] ps-[0.8rem] text-[1.1rem] h-[44px] w-full bg-[#111] border-none outline-none rounded-lg" placeholder="Tags" required/>
                     <input value={project.type} onChange={handleInputChange} type="text" name="type" className="mt-[1rem] ps-[0.8rem] text-[1.1rem] h-[44px] w-full bg-[#111] border-none outline-none rounded-lg" placeholder="Type" required/>
+                    <input value={project.size} onChange={handleInputChange} type="text" name="size" className="mt-[1rem] ps-[0.8rem] text-[1.1rem] h-[44px] w-full bg-[#111] border-none outline-none rounded-lg" placeholder="Size" required/>
+                    <input value={project.categories} onChange={handleInputChange} type="text" name="categories" className="mt-[1rem] ps-[0.8rem] text-[1.1rem] h-[44px] w-full bg-[#111] border-none outline-none rounded-lg" placeholder="Categories" required/>
                     <input value={project.site} onChange={handleInputChange} type="text" name="site" className="mt-[1rem] ps-[0.8rem] text-[1.1rem] h-[44px] w-full bg-[#111] border-none outline-none rounded-lg" placeholder="Preview Link" required/>
                     <input value={project.code} onChange={handleInputChange} type="text" name="code" className="mt-[1rem] ps-[0.8rem] text-[1.1rem] h-[44px] w-full bg-[#111] border-none outline-none rounded-lg" placeholder="GitHub Link" required/>
                     
