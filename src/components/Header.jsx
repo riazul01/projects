@@ -42,7 +42,7 @@ const Header = ({setShowForm}) => {
     return (
         <div className="flex flex-col xl:flex-row items-center justify-between w-full">
             {/* title */}
-            <Link to="/" className="text-[#fff] text-[2.2rem] uppercase font-[700] bg-gradient-to-r from-indigo-400 via-sky-400 to-emerald-400 inline-block text-transparent bg-clip-text">Macros.</Link>
+            <Link to="/" className="text-[#fff] text-[2.2rem] uppercase font-[700] bg-gradient-to-r from-indigo-400 via-sky-400 to-emerald-400 inline-block text-transparent bg-clip-text">Projects.</Link>
 
             <div className="relative mt-[1rem] xl:mt-0 flex flex-wrap items-center justify-center xl:justify-end gap-[1rem] w-full">
                 {/* projects count */}
