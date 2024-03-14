@@ -48,7 +48,7 @@ const AddProject = ({setShowForm}) => {
         e.preventDefault();
         const projectData = {
             title: project.title,
-            fonts: project.fonts.split(' '),
+            fonts: project.fonts !== '' ? project.fonts.split(' ') : '',
             icons: project.icons !== '' ? project.icons.split(' ') : '',
             status: project.status,
             plugins: project.plugins !== '' ? project.plugins.split(' ') : '',
@@ -80,7 +80,7 @@ const AddProject = ({setShowForm}) => {
                 {/* form */}
                 <form onSubmit={handleSubmit} className="mt-[1.4rem] w-full h-auto">
                     <input value={project.title} onChange={handleInputChange} type="text" name="title" className="mt-[0.4rem] ps-[0.8rem] text-[1.1rem] h-[44px] w-full bg-[#111] border-none outline-none rounded-lg" placeholder="Project title" required/>
-                    <input value={project.fonts} onChange={handleInputChange} type="text" name="fonts" className="mt-[1rem] ps-[0.8rem] text-[1.1rem] h-[44px] w-full bg-[#111] border-none outline-none rounded-lg" placeholder="Fonts" required/>
+                    <input value={project.fonts} onChange={handleInputChange} type="text" name="fonts" className="mt-[1rem] ps-[0.8rem] text-[1.1rem] h-[44px] w-full bg-[#111] border-none outline-none rounded-lg" placeholder="Fonts"/>
                     <input value={project.icons} onChange={handleInputChange} type="text" name="icons" className="mt-[1rem] ps-[0.8rem] text-[1.1rem] h-[44px] w-full bg-[#111] border-none outline-none rounded-lg" placeholder="Icons"/>
                     <input value={project.status} onChange={handleInputChange} type="text" name="status" className="mt-[1rem] ps-[0.8rem] text-[1.1rem] h-[44px] w-full bg-[#111] border-none outline-none rounded-lg" placeholder="Status" required/>
                     <input value={project.plugins} onChange={handleInputChange} type="text" name="plugins" className="mt-[1rem] ps-[0.8rem] text-[1.1rem] h-[44px] w-full bg-[#111] border-none outline-none rounded-lg" placeholder="Plugins"/>
