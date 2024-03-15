@@ -7,7 +7,7 @@ import { RiArrowDropRightLine } from 'react-icons/ri';
 import { RiArrowDropLeftLine } from 'react-icons/ri';
 import { Link } from 'react-router-dom';
 
-const Header = ({setShowForm}) => {
+const Header = ({searchText, setSearchText, setShowForm}) => {
     const [toggle, setToggle] = useState(false);
     const [activeRightNav, setActiveRightNav] = useState(false);
     const [listCategory, setListCategory] = useState('react');
@@ -39,6 +39,12 @@ const Header = ({setShowForm}) => {
         setActiveRightNav(false);
     }
 
+    const handleSearchText = (e) => {
+        setSearchText(e.target.value);
+    }
+
+    console.log(searchText);
+
     return (
         <div className="flex flex-col xl:flex-row items-center justify-between w-full">
             {/* title */}
@@ -60,7 +66,7 @@ const Header = ({setShowForm}) => {
 
                 {/* search projects */}
                 <div className="flex items-center justify-center w-full max-w-[400px] rounded-lg overflow-hidden">          
-                    <input name="searchText" className="pl-[1rem] text-[1.1rem] text-[#fff] h-[44px] w-[84%] bg-[#000] border-[2px] border-emerald-500 outline-none rounded-l-lg" type="text" placeholder="Search projects..."/>
+                    <input value={searchText} onChange={handleSearchText} name="searchText" className="pl-[1rem] text-[1.1rem] text-[#fff] h-[44px] w-[84%] bg-[#000] border-[2px] border-emerald-500 outline-none rounded-l-lg" type="text" placeholder="Search projects..."/>
                     
                     <div className="text-[1.1rem] text-[#fff] flex items-center justify-center h-[44px] w-[16%] bg-gradient-to-r from-emerald-500 to-indigo-500 cursor-pointer rounded-r-lg">
                         <BiSearchAlt className="text-[1.6rem]"/>
