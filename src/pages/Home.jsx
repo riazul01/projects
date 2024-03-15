@@ -23,6 +23,7 @@ const Fallbacks = ({loading, searchText, projects}) => {
 const Home = () => {
     const {projects, loading} = useContext(ProjectsContext);
     const [searchText, setSearchText] = useState('');
+    const [sortType, setSortType] = useState('bigger');
     const [filteredItems, setFilteredItems] = useState([]);
     const [showForm, setShowForm] = useState(false);
 
@@ -44,12 +45,47 @@ const Home = () => {
             return null;
         });
 
+        // sorting
+        if (sortType === 'ascending') {
+            filteredData.sort((a, b) => {
+                let x = a.title.toLowerCase();
+                let y = b.title.toLowerCase();
+                if (x < y) return -1;
+                if (x > y) return 1;
+                return 0;
+            });
+        } else if (sortType === 'descending') {
+            filteredData.sort((a, b) => {
+                let x = a.title.toLowerCase();
+                let y = b.title.toLowerCase();
+                if (x < y) return 1;
+                if (x > y) return -1;
+                return 0;
+            });
+        } else if (sortType === 'bigger') {
+            filteredData.sort((a, b) => {
+                let x = parseInt(a.size);
+                let y = parseInt(b.size);
+                if (x < y) return 1;
+                if (x > y) return -1;
+                return 0;
+            });
+        } else if (sortType === 'smaller') {
+            filteredData.sort((a, b) => {
+                let x = parseInt(a.size);
+                let y = parseInt(b.size);
+                if (x < y) return -1;
+                if (x > y) return 1;
+                return 0;
+            });
+        }
+
         setFilteredItems(filteredData);
-    }, [projects, searchText]);
+    }, [projects, searchText, sortType]);
 
     return (
         <AppLayout>
-            <Header searchText={searchText} setSearchText={setSearchText} setShowForm={setShowForm}/>
+            <Header searchText={searchText} setSearchText={setSearchText} sortType={sortType} setSortType={setSortType} setShowForm={setShowForm}/>
             {showForm && <AddProject setShowForm={setShowForm}/>}
 
             <Fallbacks loading={loading} searchText={searchText} projects={filteredItems}/>

@@ -7,7 +7,7 @@ import { RiArrowDropRightLine } from 'react-icons/ri';
 import { RiArrowDropLeftLine } from 'react-icons/ri';
 import { Link } from 'react-router-dom';
 
-const Header = ({searchText, setSearchText, setShowForm}) => {
+const Header = ({searchText, setSearchText, sortType, setSortType, setShowForm}) => {
     const [toggle, setToggle] = useState(false);
     const [activeRightNav, setActiveRightNav] = useState(false);
     const [listCategory, setListCategory] = useState('react');
@@ -43,7 +43,9 @@ const Header = ({searchText, setSearchText, setShowForm}) => {
         setSearchText(e.target.value);
     }
 
-    console.log(searchText);
+    const handleSortType = (e) => {
+        setSortType(e.target.value);
+    }
 
     return (
         <div className="flex flex-col xl:flex-row items-center justify-between w-full">
@@ -76,9 +78,9 @@ const Header = ({searchText, setSearchText, setShowForm}) => {
                 {/* sort projects */}
                 <div className="flex items-center outline-none rounded-lg overflow-hidden">
                     <p className="px-[0.8rem] flex items-center justify-center h-[44px] text-[1.1rem] font-[500] bg-gradient-to-r from-indigo-500 via-sky-500 to-emerald-500">Sort by</p>
-                    <select name="sortType" className="px-[0.6rem] h-[44px] text-[#fff] text-[1.1rem] bg-[#000] border-[2px] border-emerald-500 rounded-r-lg outline-none">
+                    <select value={sortType} onChange={handleSortType} name="sortType" className="px-[0.6rem] h-[44px] text-[#fff] text-[1.1rem] bg-[#000] border-[2px] border-emerald-500 rounded-r-lg outline-none">
                         <option value="ascending">Ascending</option>
-                        <option value="decending">Decending</option>
+                        <option value="descending">Descending</option>
                         <option value="bigger">Bigger</option>
                         <option value="smaller">Smaller</option>
                     </select>
