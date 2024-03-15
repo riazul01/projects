@@ -5,6 +5,21 @@ import AddProject from './AddProject';
 import ProjectCard from '../components/ProjectCard';
 import { ProjectsContext } from '../context/ProjectsContextProvider';
 
+// handle fallbacks
+const Fallbacks = ({loading, searchText, projects}) => {
+    let fallbackElem = null;
+
+    if (searchText !== '' && projects.length === 0) {
+        fallbackElem = <p className="py-[2rem] text-[1.2rem]">No items found!</p>;
+    } else if (loading) {
+        fallbackElem = <p className="py-[2rem] text-[1.2rem]">Please wait...</p>;
+    } else if (!loading && projects.length === 0) {
+        fallbackElem = <p className="py-[2rem] text-[1.2rem]">Something Wrong!</p>;
+    }
+
+    return fallbackElem;
+}
+
 const Home = () => {
     const {projects, loading} = useContext(ProjectsContext);
     const [searchText, setSearchText] = useState('');
@@ -36,6 +51,8 @@ const Home = () => {
         <AppLayout>
             <Header searchText={searchText} setSearchText={setSearchText} setShowForm={setShowForm}/>
             {showForm && <AddProject setShowForm={setShowForm}/>}
+
+            <Fallbacks loading={loading} searchText={searchText} projects={filteredItems}/>
 
             {!loading && <div className="py-[2rem] grid grid-cols-3">
                 {filteredItems.map((project, index) => {
