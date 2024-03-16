@@ -1,9 +1,10 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext, useRef } from 'react';
 import AppLayout from '../layouts/AppLayout';
 import Header from '../components/Header';
 import AddProject from './AddProject';
 import ProjectCard from '../components/ProjectCard';
 import { ProjectsContext } from '../context/ProjectsContextProvider';
+import Pagination from '../components/Pagination';
 
 // handle fallbacks
 const Fallbacks = ({loading, searchText, projects}) => {
@@ -26,6 +27,10 @@ const Home = () => {
     const [sortType, setSortType] = useState('bigger');
     const [filteredItems, setFilteredItems] = useState([]);
     const [showForm, setShowForm] = useState(false);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [limit, setLimit] = useState(6);
+    const startRef = useRef(0);
+    const endRef = useRef(0);
 
     useEffect(() => {
         const body = document.querySelector('body');
@@ -83,6 +88,9 @@ const Home = () => {
         setFilteredItems(filteredData);
     }, [projects, searchText, sortType]);
 
+    startRef.current = (currentPage - 1) * limit;
+    endRef.current = ((currentPage - 1) * limit) + limit;
+
     return (
         <AppLayout>
             <Header searchText={searchText} setSearchText={setSearchText} sortType={sortType} setSortType={setSortType} setShowForm={setShowForm}/>
@@ -91,10 +99,12 @@ const Home = () => {
             <Fallbacks loading={loading} searchText={searchText} projects={filteredItems}/>
 
             {!loading && <div className="py-[2rem] grid grid-cols-3">
-                {filteredItems.map((project, index) => {
+                {filteredItems.slice(startRef.current, endRef.current).map((project, index) => {
                     return <ProjectCard key={project.id} data={project} index={index}/>
                 })}
             </div>}
+
+            {<Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} limit={limit} setLimit={setLimit} totalPages={Math.ceil(filteredItems.length / limit)}/>}
         </AppLayout>
     );
 }
