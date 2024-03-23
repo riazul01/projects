@@ -1,14 +1,12 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useEffect } from 'react';
 
 // icons
 import { MdKeyboardDoubleArrowLeft } from 'react-icons/md';
 import { MdKeyboardDoubleArrowRight } from 'react-icons/md';
 
 const Pagination = ({currentPage, setCurrentPage, limit, setLimit, totalPages}) => {
-    console.log(currentPage);
-    
     useEffect(() => {
-        if (currentPage > totalPages) {
+        if (currentPage > totalPages && totalPages !== 0) {
             setCurrentPage(totalPages);
         }
     }, [currentPage, limit]);
@@ -46,7 +44,7 @@ const Pagination = ({currentPage, setCurrentPage, limit, setLimit, totalPages}) 
     }
 
     const handleLimitChange = (e) => {
-        setLimit(e.target.value);
+        setLimit(parseInt(e.target.value));
     }
 
     return (

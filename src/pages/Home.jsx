@@ -29,6 +29,7 @@ const Home = () => {
     const [showForm, setShowForm] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
     const [limit, setLimit] = useState(6);
+    const totalPages = useRef(1);
     const startRef = useRef(0);
     const endRef = useRef(0);
 
@@ -89,7 +90,8 @@ const Home = () => {
     }, [projects, searchText, sortType]);
 
     startRef.current = (currentPage - 1) * limit;
-    endRef.current = ((currentPage - 1) * limit) + limit;
+    endRef.current = parseInt(startRef.current) + limit;
+    totalPages.current = Math.ceil(filteredItems.length / limit);
 
     return (
         <AppLayout>
@@ -104,7 +106,7 @@ const Home = () => {
                 })}
             </div>}
 
-            {<Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} limit={limit} setLimit={setLimit} totalPages={Math.ceil(filteredItems.length / limit)}/>}
+            {!loading && <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} limit={limit} setLimit={setLimit} totalPages={totalPages.current}/>}
         </AppLayout>
     );
 }
