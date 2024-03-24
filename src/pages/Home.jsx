@@ -28,7 +28,7 @@ const Home = () => {
     const [filteredItems, setFilteredItems] = useState([]);
     const [showForm, setShowForm] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
-    const [limit, setLimit] = useState(6);
+    const [limit, setLimit] = useState(9);
     const totalPages = useRef(1);
     const startRef = useRef(0);
     const endRef = useRef(0);
